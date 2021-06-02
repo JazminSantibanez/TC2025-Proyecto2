@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "sumaTotal.c"
+
 #define DEFAULT_THREADS 50
 
 int main(int argc, char *argv[])
@@ -23,5 +25,9 @@ int main(int argc, char *argv[])
             numThreads = DEFAULT_THREADS;
         }
     }
+
+    int sum = sumaTotal(3);
+    printf("Suma total: %d\n", sum);
+
     return EXIT_SUCCESS;
 }
