@@ -10,16 +10,13 @@
 
 #include "../lib/server_functions.h"
 
-double *regresion(int size) {
+point regresion(int size) {
   time_t t;
   srand((unsigned)time(&t)); // Hacer random real
-  int *arr;
-  double *ans;
 
-  arr = (int *)malloc(sizeof(int) * size);
-  ans = (double *)malloc(sizeof(double) * 2);
+  int *arr = (int *)malloc(sizeof(int) * size);
 
-  double sumX = 0.0, sumY = 0.0, sumXY = 0.0, sumXX = 0.0, avgX, avgY;
+  double sumX = 0.0, sumY = 0.0, sumXY = 0.0, sumXX = 0.0;
   // Generar n numeros random
 
   for (int i = 0; i < size; i++) {
@@ -33,15 +30,16 @@ double *regresion(int size) {
     sumXX += pow(i, 2.0);
     sumXY += (i * arr[i]);
   }
-  avgX = sumX / (double)size;
-  avgY = sumY / (double)size;
+
+  double avgX = sumX / (double)size;
+  double avgY = sumY / (double)size;
 
   // Hacer regresion lineal
-  double b0, b1;
-  b1 = (sumXY - (size * avgX * avgY)) / (sumXX - (size * pow(avgX, 2.0)));
-  b0 = avgY - b1 * avgX;
+  point p;
+  p.b1 = (sumXY - (size * avgX * avgY)) / (sumXX - (size * pow(avgX, 2.0)));
+  p.b0 = avgY - p.b1 * avgX;
 
-  ans[0] = b1;
-  ans[1] = b0;
-  return ans;
+  free(arr);
+
+  return p;
 }
