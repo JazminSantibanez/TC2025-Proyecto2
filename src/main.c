@@ -1,7 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "sumaTotal.c"
+//#include "sumaTotal.c"
+#include "regresion.c"
 
 #define DEFAULT_THREADS 50
 
@@ -26,8 +27,10 @@ int main(int argc, char *argv[])
         }
     }
 
-    int sum = sumaTotal(3);
-    printf("Suma total: %d\n", sum);
+    double *ans;
+    ans = regresion(5);
+    printf("\nRegresion: %0.4lfx + %0.4lf\n", ans[0], ans[1]);
+    //printf("Suma total: %d\n", sum);
 
     return EXIT_SUCCESS;
 }
