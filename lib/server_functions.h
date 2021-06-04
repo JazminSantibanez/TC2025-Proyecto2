@@ -1,6 +1,6 @@
 #pragma once
 
-int calculate_pi();
+double calculate_pi();
 char *get_html();
 int nearest_prime(int n);
 double *regresion(int size);

@@ -10,11 +10,10 @@
 static long steps = 1000000000;
 double step;
 
-int calculate_pi() {
-
+double calculate_pi() {
   double pi = 0.0;
-  double start, delta, sum[NUM_THREADS];
-  start = omp_get_wtime();
+  double sum[NUM_THREADS];
+
   step = 1.0 / (double)steps;
   omp_set_num_threads(NUM_THREADS);
 #pragma omp parallel
@@ -30,9 +29,6 @@ int calculate_pi() {
   for (int i = 0; i < NUM_THREADS; i++) {
     pi += sum[i] * step;
   }
-  delta = omp_get_wtime() - start;
-  printf("PI = %.11g \n", pi);
-  time_t t = time(NULL);
-  struct tm tm = *localtime(&t);
-  printf("now:  %02d:%02d:%02d\n", tm.tm_hour, tm.tm_min, tm.tm_sec);
+
+  return pi;
 }
