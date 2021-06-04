@@ -27,7 +27,9 @@ int main(int argc, char *argv[])
         }
     }
 
-    regresion(5);
+    double *ans;
+    ans = regresion(5);
+    printf("\nRegresion: %0.4lfx + %0.4lf\n", ans[0], ans[1]);
     //printf("Suma total: %d\n", sum);
 
     return EXIT_SUCCESS;
