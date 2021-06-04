@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../lib/server_functions.h"
+
 char *read_file(char *filename) {
   char *buffer = NULL;
   int string_size, read_size;
