@@ -21,30 +21,30 @@ void print_matrix(int size, int mat[size][size]) {
   }
 }
 
-int total_sum(int matSize) {
-  int matrix[matSize][matSize], sumaTotal = 0;
+int total_sum(int mat_size) {
+  int matrix[mat_size][mat_size], total_sum = 0;
 
   time_t t;
   srand((unsigned)time(&t)); // Hacer random real
 
   // Inicializar matrices en valores al azar
-  for (int i = 0; i < matSize; i++) {
-    for (int j = 0; j < matSize; j++) {
+  for (int i = 0; i < mat_size; i++) {
+    for (int j = 0; j < mat_size; j++) {
       matrix[i][j] = rand() % 10;
     }
   }
 
-  printf(" \nMatriz al azar de %dx%d: \n", matSize, matSize);
-  print_matrix(matSize, matrix);
+  printf(" \nMatriz al azar de %dx%d: \n", mat_size, mat_size);
+  print_matrix(mat_size, matrix);
 
   omp_set_num_threads(NUM_THREADS);
 
-#pragma omp parallel for reduction(+ : sumaTotal)
-  for (int i = 0; i < matSize; i++) {
-    for (int j = 0; j < matSize; j++) {
-      sumaTotal += matrix[i][j];
+#pragma omp parallel for reduction(+ : total_sum)
+  for (int i = 0; i < mat_size; i++) {
+    for (int j = 0; j < mat_size; j++) {
+      total_sum += matrix[i][j];
     }
   }
 
-  return sumaTotal;
+  return total_sum;
 }
