@@ -46,7 +46,7 @@ void socket_thread(int client_socket) {
     strcat(server_response, regresion_formula);
   } else if (fmod(received_num, 7) == 0) {
     char pi_str[1024] = {0};
-    sprintf(pi_str, "%f", calculate_pi());
+    sprintf(pi_str, "%.10f", calculate_pi());
 
     strcpy(server_response, time);
     strcat(server_response, pi_str);
