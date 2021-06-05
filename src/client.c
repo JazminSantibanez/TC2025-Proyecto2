@@ -58,6 +58,8 @@ void execute_client(char *num_to_send) {
     fputs(server_response, html_file);
     fclose(html_file);
 
+// I added windows anyway, even though it won't compile because it
+// doesn't support the pthread header :(
 #ifdef _WIN32
     system("start client_index.html");
 #endif
