@@ -58,8 +58,17 @@ void execute_client(char *num_to_send) {
     fputs(server_response, html_file);
     fclose(html_file);
 
-    system("xdg-open client_index.html");
+#ifdef _WIN32
+    system("start client_index.html");
+#endif
+#ifdef __APPLE__
+    system("open client_index.html");
+#endif
+#ifdef __linux__
+    system("sensible-browser client_index.html");
+#endif
 
+    sleep(1);
     remove("client_index.html");
   }
 }
