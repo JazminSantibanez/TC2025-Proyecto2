@@ -13,6 +13,8 @@
 #include <time.h>
 #include <unistd.h> // for close
 
+#define DEFAULT_THREADS 50
+
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 
 void socket_thread(int client_socket) {
@@ -74,12 +76,24 @@ void socket_thread(int client_socket) {
   close(new_socket);
 }
 
-int main() {
+int main(int argc, char *argv[]) {
+
+  int num_threads = DEFAULT_THREADS;
+
+  if (argc > 3) {
+    printf(" !! Error: El programa acepta como máximo 1 argumento ");
+    return EXIT_FAILURE;
+  }
+
+  if (argc == 2) {
+    num_threads = atoi(argv[1]);
+  }
+
   int server_socket, new_socket;
   struct sockaddr_in server_addr;
   struct sockaddr_storage server_storage;
   socklen_t addr_size;
-  pid_t pid[50];
+  pid_t pid[num_threads];
 
   // Create the socket.
   server_socket = socket(PF_INET, SOCK_STREAM, 0);
@@ -101,8 +115,9 @@ int main() {
   (void)bind(server_socket, (struct sockaddr *)&server_addr,
              sizeof(server_addr));
 
-  // Listen on the socket, with 50 max connection requests queued
-  if (listen(server_socket, 50) == 0)
+  // Listen on the socket, with 50 (or user-defined) max connection requests
+  // queued
+  if (listen(server_socket, num_threads) == 0)
     printf("Listening\n");
   else
     printf("Error\n");
@@ -120,7 +135,7 @@ int main() {
       pid[i++] = pid_c;
       if (i >= 49) {
         i = 0;
-        while (i < 50)
+        while (i < num_threads)
           waitpid(pid[i++], NULL, 0);
         i = 0;
       }
