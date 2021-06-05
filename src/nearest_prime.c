@@ -1,6 +1,8 @@
 #include <math.h>
 
-int closestPrime(int n) {
+#include "../lib/server_functions.h"
+
+int nearest_prime(int n) {
 
   if (n & 1)
     n -= 2;
