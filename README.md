@@ -1,6 +1,17 @@
 # TC2025-Proyecto2
 
-# Pasos para ejecutar el proyecto
+Proyecto #2 para la clase de Programación avanzada grupo 4.
+
+## Estructura del proyecto
+
+* TC2025-Proyecto2
+  * build
+    - bin
+  * html
+  * lib
+  * src
+
+## Pasos para ejecutar el proyecto
 
 1. Crear una carpeta llamada `build` en el directorio principal (TC2025-Proyecto2/build)
 2. Entrar a la carpeta build
